@@ -53,3 +53,10 @@ DnCNN-S-15
   <img src="logs/psnr_over_batches.png" alt="PSNR Curve" width="40%">
 </p>
 
+---
+
+## 錯誤紀錄
+
+test_*.py 或 *_test.py 的檔案會被 PyCharm 或 pytest 自動當作測試檔案處理  
+使用的時候記得避開命名  
+ 
