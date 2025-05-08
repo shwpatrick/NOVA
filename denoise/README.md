@@ -39,4 +39,4 @@
 
 - `logs` 資料夾中包含：
   - 第一個 epoch 訓練過程中每個 batch 的 `loss` 與 `PSNR` 記錄（txt 格式）
-  - 以及繪製的對應圖表（`loss` / `PSNR` 對 batch 的變化折線圖）
+  - 以及繪製的對應圖表（`loss` / `PSNR` 對 batch 的變化圖）
