@@ -83,9 +83,9 @@ demo_gaussian3x3
 demo_gaussian7x7  
 ![demo_gaussian7x7](demo_gaussian7x7/0001_compare.png)  
 demo_gaussian3x3_sharpen_bad  
-![demo_gaussian3x3_sharpen_bad](demo_gaussian3x3_sharpen_bad/0001_compare.png)  
+![demo_gaussian3x3_sharpen_bad](demo_gaussian_sharpen3x3/0001_compare.png)  
 demo_gaussian3x3_sharpen_good  
-![demo_gaussian3x3_sharpen_good](demo_gaussian3x3_sharpen_good/0001_compare.png)  
+![demo_gaussian3x3_sharpen_good](demo_gaussian_sharpen7x7/0001_compare.png)  
 
 
 - `logs` 資料夾中包含：
