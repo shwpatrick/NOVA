@@ -63,6 +63,7 @@
 | Gaussian 7×7                | 26.349623   | 更大核，略提升平滑但差異不大，因高斯權重集中於中心                     |
 | Gaussian 3×3 + Sharpen（異常）| 20.198921   | 模糊後直接銳化，強化雜訊導致 PSNR 降低                                 |
 | Gaussian 7×7 + Sharpen（正常）| 26.233786   | 適度銳化後仍維持原圖接近性，PSNR 僅略低於原 Gaussian                   |
+| BM3D                         | 29.975693   |                                                                     |
 
 python test_wiener.py --kernel_size 3  
 python test_wiener.py --kernel_size 7  
