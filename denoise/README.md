@@ -99,7 +99,8 @@ demo_gaussian3x3_sharpen_bad
 ![demo_gaussian3x3_sharpen_bad](demo_gaussian_sharpen3x3/0001_compare.png)  
 demo_gaussian3x3_sharpen_good  
 ![demo_gaussian3x3_sharpen_good](demo_gaussian_sharpen7x7/0001_compare.png)  
-
+demo_bm3d
+![demo_bm3d](demo_bm3d/0001_compare.png)
 
 - `logs` 資料夾中包含：
   - 第一個 epoch 訓練過程中每個 batch 的 `loss` 與 `PSNR` 記錄（txt 格式）
