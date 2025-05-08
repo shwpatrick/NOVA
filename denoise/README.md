@@ -48,6 +48,13 @@ DnCNN-S-15
 1epoch  
 ![demo_1epoch](demo_1epoch/0001_compare.png)  
 
+傳統作法
+demo_wiener3x3  
+![demo_wiener3x3](demo_wiener3x3/0001_compare.png)  
+demo_wiener7x7  
+![demo_wiener7x7](demo_wiener7x7/0001_compare.png)  
+
+
 
 - `logs` 資料夾中包含：
   - 第一個 epoch 訓練過程中每個 batch 的 `loss` 與 `PSNR` 記錄（txt 格式）
