@@ -37,6 +37,11 @@
 | demo_DnCNN-S-15  | DnCNN-S-15 模型參數 | 32.812982     |
 | demo_1epoch      | 訓練 1 epoch 的參數 | 30.626433     |
 
+Wiener 3x3 26.580558
+Wiener 7x7 25.927358
+
+python test_wiener.py --kernel_size 3
+python test_wiener.py --kernel_size 7
 
 DnCNN-S-15  
 ![demo_DnCNN-S-15](demo_DnCNN-S-15/0001_compare.png)  
