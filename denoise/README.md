@@ -20,6 +20,9 @@
   - 高斯雜訊去除（Gaussian denoising）
   - 盲噪（blind denoising）等問題。
 
+- 幾種傳統方法明顯弱於DnCNN效果
+- 銳化有助於人體清晰度感覺，但對PSNR來說反而是傷的
+
 ---
 
 ## DnCNN核心概念簡述
