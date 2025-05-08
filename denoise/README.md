@@ -32,18 +32,25 @@
 
 ## 🖼️ 圖片展示（橫向排列：原圖／加噪／去噪）
 
+### CnDNN
+
 | 資料夾名稱       | 使用參數           | 平均 PSNR     |
 |------------------|--------------------|---------------|
 | demo_DnCNN-S-15  | DnCNN-S-15 模型參數 | 32.812982     |
 | demo_1epoch      | 訓練 1 epoch 的參數 | 30.626433     |
 
-Wiener 3x3 26.580558    
-Wiener 7x7 25.927358  
-Mean 3x3 25.844596  
-Mean 7x7 23.265147  
-Gaussian 3x3 26.341389
-Gaussian 7x7 26.349623
+### 傳統方法
 
+| 處理方法                     | PSNR        | 原理簡述                                                                 |
+|-----------------------------|-------------|--------------------------------------------------------------------------|
+| Wiener 3×3                  | 26.580558   | 自適應濾波器，根據區域統計特性降低噪聲，保留邊緣                       |
+| Wiener 7×7                  | 25.927358   | 同上，較大區域平滑效果強，但可能損失細節                               |
+| Mean 3×3                    | 25.844596   | 均值濾波，對每個像素取鄰域平均值，去噪力弱，邊緣模糊                    |
+| Mean 7×7                    | 23.265147   | 大範圍均值濾波，強力去噪但嚴重模糊圖像                                 |
+| Gaussian 3×3                | 26.341389   | 以高斯權重平滑圖像，保留部分邊緣，去噪與保邊平衡                        |
+| Gaussian 7×7                | 26.349623   | 更大核，略提升平滑但差異不大，因高斯權重集中於中心                     |
+| Gaussian 3×3 + Sharpen（異常）| 20.198921   | 模糊後直接銳化，強化雜訊導致 PSNR 降低                                 |
+| Gaussian 7×7 + Sharpen（正常）| 26.233786   | 適度銳化後仍維持原圖接近性，PSNR 僅略低於原 Gaussian                   |
 
 python test_wiener.py --kernel_size 3  
 python test_wiener.py --kernel_size 7  
@@ -51,6 +58,8 @@ python testfor_mean.py --kernel_size 3
 python testfor_mean.py --kernel_size 7  
 python testfor_gaussian.py --kernel_size 3  
 python testfor_gaussian.py --kernel_size 7  
+python testfor_gaussian_sharpen.py --kernel_size 3  
+python testfor_gaussian_sharpen.py --kernel_size 7  
 
 ### DnCNN
 
@@ -65,7 +74,18 @@ demo_wiener3x3
 ![demo_wiener3x3](demo_wiener3x3/0001_compare.png)  
 demo_wiener7x7  
 ![demo_wiener7x7](demo_wiener7x7/0001_compare.png)  
-
+demo_mean3x3  
+![demo_mean3x3](demo_mean3x3/0001_compare.png)  
+demo_mean7x7  
+![demo_mean7x7](demo_mean7x7/0001_compare.png)  
+demo_gaussian3x3  
+![demo_gaussian3x3](demo_gaussian3x3/0001_compare.png)  
+demo_gaussian7x7  
+![demo_gaussian7x7](demo_gaussian7x7/0001_compare.png)  
+demo_gaussian3x3_sharpen_bad  
+![demo_gaussian3x3_sharpen_bad](demo_gaussian3x3_sharpen_bad/0001_compare.png)  
+demo_gaussian3x3_sharpen_good  
+![demo_gaussian3x3_sharpen_good](demo_gaussian3x3_sharpen_good/0001_compare.png)  
 
 
 - `logs` 資料夾中包含：
