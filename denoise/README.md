@@ -1,9 +1,9 @@
 # 測試紀錄與理解整理：DnCNN-PyTorch
 
-## 🔗 資料來源
+## 參考資料
 
-- 使用程式： [DnCNN-PyTorch GitHub](https://github.com/SaoYan/DnCNN-PyTorch/tree/master)  
-- 論文來源： [Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising](https://arxiv.org/pdf/1608.03981)
+- 程式： [DnCNN-PyTorch GitHub](https://github.com/SaoYan/DnCNN-PyTorch/tree/master)  
+- 論文： [Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising](https://arxiv.org/pdf/1608.03981)
 
 ---
 
