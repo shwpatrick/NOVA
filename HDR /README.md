@@ -330,6 +330,12 @@ articulation 由框架中的動態範圍所決定，而目前的算法推演會�
 並根據高斯機率圖條件：
 
 $$
+P_i(Y_{\max}) = P_i(Y_{\min}) = \exp\left(-\frac{(C_i - Y)^2}{2\sigma^2}\right) = 0.6
+$$
+
+代入 $Y = C_i \pm \text{diff}$：
+
+$$
 \exp\left(-\frac{\text{diff}^2}{2\sigma^2}\right) = 0.6
 \Rightarrow
 -\frac{\text{diff}^2}{2\sigma^2} = \ln(0.6)
@@ -349,6 +355,25 @@ $$
 Y_{\max} - Y_{\min} = 2 \cdot \text{diff} = 2.036 \cdot \sigma
 $$
 
+在論文中的中心點 refine 後，我們保證所有相鄰中心點距離 $\geq 1$，因此：
+
+$$
+\sigma \geq 1.0 \Rightarrow \text{Dynamic range} \geq 2.036
+$$
+
+articulation 定義如下：
+
+$$
+A_i = 1 - \exp\left(-\frac{(\Delta Y_i)^2}{2 \cdot 0.33^2} \right)
+$$
+
+代入 $\Delta Y_i = 2.036$：
+
+$$
+\frac{(2.036)^2}{2 \cdot 0.33^2} = \frac{4.15}{0.2178} \approx 19.06
+\Rightarrow
+A_i \approx 1 - \exp(-19.06) \approx 1.0
+$$
 
 
 
