@@ -15,6 +15,7 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
     - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)
     - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響)
     - [articulation的失能情況觀察](#articulation的失能情況觀察)
+    - [articulation縮放因子調整](#articulation縮放因子調整)
 
 ---
 
@@ -377,12 +378,17 @@ $$
 
 在此做一個小結，當 σ 大於 1 的設計，初始有效框架的選定為 P > 0.6  
 就會直接導致articulation 失能的結果
+也有可能是articulation 的 $Y_{\max}$ 與 $Y_{\min}$ 並不是來源於框架篩選條件，採用像素與框架一對一映射的做法？
+但論文中目前沒有找到相關的描述  
+
+
 
 ![image](https://github.com/user-attachments/assets/ae57dcd0-dfb9-446a-833b-df8bc79bc9c9)  
 
 從Paper的圖片描述動態範圍與articulation 的關係  
 我們可以看出動態範圍在0.5以下的情況下articulation 才會生效  
-為了觀察這張線圖的關係性，我使用dynamic range = 0.32代入articulaiton 算式  
+而這個在配置方法中難以達成
+
 
 
 
