@@ -252,6 +252,10 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
   <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
 
+至此我開始思考 σ 設置對於有效框判定的影響，我改將 σ 設置為固定的常數而非最大相鄰中心點距離  
+以下分別將 σ 設置成1.1 以及0.5  
+
+
 
 
 
