@@ -406,22 +406,37 @@ $$
 以下則是對應每個框架的articulation 實際參數
 
 
-1e-3 auto1.51 apara 0.33
+1e-3 auto1.51 apara 0.33  
 mask idx: 0 articulation: 1.0 , min: -3.0 , max: -0.1186158 , diff: 2.8813841  
 mask idx: 1 articulation: 1.0 , min: -1.9590952 , max: 1.090032 , diff: 3.049127  
 mask idx: 2 articulation: 1.0 , min: -0.45076218 , max: 2.3047442 , diff: 2.7555065  
 
-1e-3 auto1.51 apara 2.00
+1e-3 auto1.51 apara 2.00  
 mask idx: 0 articulation: 0.6457657 , min: -3.0 , max: -0.1186158 , diff: 2.8813841  
 mask idx: 1 articulation: 0.6871862 , min: -1.9590952 , max: 1.090032 , diff: 3.049127  
 mask idx: 2 articulation: 0.6129115 , min: -0.45076218 , max: 2.3047442 , diff: 2.7555065  
 
 <p align="left">
-  <img src="data/1e-4.0 - hard1.10 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
-  <img src="data/1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/Probability_Map_After_Norm.png"  width="100%">
+  <img src="data/1e-3.0 - auto1.51 - greedy - a_para 2.00/Probability_Map_After_Norm.png"  width="100%">
 </p>
 
+1e-4 auto2.20 apara 0.33  
+mask idx: 0 articulation: 1.0 , min: -4.0 , max: -1.5650234 , diff: 2.4349766
+mask idx: 1 articulation: 1.0 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436
+mask idx: 2 articulation: 1.0 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115
+mask idx: 3 articulation: 1.0 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398
 
+1e-4 auto2.20 apara 2.00  
+mask idx: 0 articulation: 0.52342916 , min: -4.0 , max: -1.5650234 , diff: 2.4349766
+mask idx: 1 articulation: 0.91526663 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436
+mask idx: 2 articulation: 0.9157145 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115
+mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398
+
+<p align="left">
+  <img src="data/1e-4.0 - auto2.20 - greedy - a_para 0.33/Probability_Map_After_Norm.png"  width="100%">
+  <img src="data/1e-4.0 - auto2.20 - greedy - a_para 2.00/Probability_Map_After_Norm.png"  width="100%">
+</p>
 
 
 
