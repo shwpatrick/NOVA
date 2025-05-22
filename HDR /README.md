@@ -438,7 +438,7 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
   <img src="data/1e-4.0 - auto2.20 - greedy - a_para 2.00/Probability_Map_After_Norm.png"  width="100%">
 </p>
 
-從這些數據來看我們可以觀察到，調整a_para確實可以讓articulation加權權重達到效果  
+從這些數據來看我們可以觀察到，調整a_para確實可以讓articulation加權權重生效  
 但整體而言是讓極左跟極右的圖形因為受到裁切而權重降低  
 而這兩個框架在合併圖中極為重要，反而被降低了權重  
 可以在1e-3中，看出來通過mask的像素點變少  
