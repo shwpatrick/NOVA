@@ -329,6 +329,25 @@ articulation 由框架中的動態範圍所決定，而目前的算法推演會�
 
 並根據高斯機率圖條件：
 
+$$
+\exp\left(-\frac{\text{diff}^2}{2\sigma^2}\right) = 0.6
+\Rightarrow
+-\frac{\text{diff}^2}{2\sigma^2} = \ln(0.6)
+\Rightarrow
+\frac{\text{diff}}{\sigma} = \sqrt{-2 \ln(0.6)} \approx 1.0108
+$$
+
+因此：
+
+$$
+\text{diff} \approx 1.0108 \cdot \sigma
+$$
+
+整體動態範圍為：
+
+$$
+Y_{\max} - Y_{\min} = 2 \cdot \text{diff} = 2.036 \cdot \sigma
+$$
 
 
 
