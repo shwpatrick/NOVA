@@ -377,11 +377,14 @@ A_i \approx 1 - \exp(-19.06) \approx 1.0
 $$
 
 在此做一個小結，當 σ 大於 1 的設計，初始有效框架的選定為 P > 0.6  
-就會直接導致articulation 失能的結果
-也有可能是articulation 的 $Y_{\max}$ 與 $Y_{\min}$ 並不是來源於框架篩選條件，採用像素與框架一對一映射的做法？
+就會直接導致articulation 失能的結果  
+也有可能是articulation 的 $Y_{\max}$ 與 $Y_{\min}$ 並不是來源於框架篩選條件  
+採用像素與框架一對一映射的做法？  
 但論文中目前沒有找到相關的描述  
 
+---
 
+## articulation縮放因子調整
 
 ![image](https://github.com/user-attachments/assets/ae57dcd0-dfb9-446a-833b-df8bc79bc9c9)  
 
