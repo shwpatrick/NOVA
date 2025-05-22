@@ -11,8 +11,8 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 
 - [概念筆記](#概念筆記) - HDR轉LDR概念摘要
 - [實作框架拆解](#實作框架拆解) - 框架拆解實作流程(盡可能仿照論文內容)
-    - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)	
 - [觀察研究](#觀察研究) - 對於實作內容的探討
+    - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)	
 
 ---
 
