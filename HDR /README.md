@@ -232,11 +232,24 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
 | 1e-3.5     | 1.70   |
 | 1e-3       | 1.51   |
 
+
+下面的圖片組是機率圖的高斯計算，可以看得出來，σ 的數值增加使得高斯分布變得平滑，在加權後計算正規化機率時
+有效框架標準(P > 0.6)更難達到，導致沒有足夠的有效框可以進行合併。
+
+
 <p align="left">
   <img src="data/1e-4 - auto2.20 - greedy/Merged_with_sigma.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
   <img src="data/1e-3.5 - auto1.70 - greedy/Merged_with_sigma.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
   <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/Merged_with_sigma.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
+
+<p align="left">
+  <img src="data/1e-4 - auto2.20 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
+  <img src="data/1e-3.5 - auto1.70 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+</p>
+
+
 
 
 
