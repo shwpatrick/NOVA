@@ -399,11 +399,11 @@ A_i = 1 - \exp\left(-\frac{(\Delta Y_i)^2}{2 \cdot 0.33^2} \right)
 $$
 
 我們可以看到除了動態範圍外，還存在參數0.33(後續稱為a_para)  
-我是否可以透過調整a_para的方法，讓articulation組合低於1，達到真正具備加權效果的影響？
-因此我做了一組對照組與實驗組，分別為a_para = 0.33 以及 a_para = 2.0
-2.0 這個數字是手動慢慢調整的，將articulation 降到可以看到不同加權的程度
+我是否可以透過調整a_para的方法，讓articulation組合低於1，達到真正具備加權效果的影響？  
+因此我做了一組對照組與實驗組，分別為a_para = 0.33 以及 a_para = 2.0  
+2.0 這個數字是手動慢慢調整的，將articulation 降到可以看到不同加權的程度  
 圖形方面則是一樣使用1e-3以及1e-4分別作圖  
-以下則是對應每個框架的articulation 實際參數
+以下則是對應每個框架的articulation 實際參數  
 
 
 1e-3 auto1.51 apara 0.33  
