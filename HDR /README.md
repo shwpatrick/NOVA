@@ -274,6 +274,9 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
   <img src="data/1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
   
+我們可以藉此得出一個結論  
+我們必須要有足夠大的 σ ，才可以讓中間的數個框架受到左右相鄰的高斯分布正則化加權影響而消失，被判為無效框架  
+我們也需要有足夠小的 σ ，否則過於平坦的高斯分布可能會單靠單邊就使得最左或最右的高斯正則化加權機率低於0.6，導致所有框變得無效  
 
 
 
