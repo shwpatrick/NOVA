@@ -13,6 +13,7 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 - [實作框架拆解](#實作框架拆解) - 框架拆解實作流程(盡可能仿照論文內容)
 - [觀察研究](#觀察研究) - 對於實作內容的探討
     - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)
+    - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響)
     - [articulation的失能情況觀察](#articulation的失能情況觀察)
 
 ---
@@ -285,7 +286,9 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
 
 ---
 
- ## articulation的失能情況觀察
+## k-means後合併策略對於σ選定的影響
+
+## articulation的失能情況觀察
 
 
 
