@@ -375,13 +375,15 @@ $$
 A_i \approx 1 - \exp(-19.06) \approx 1.0
 $$
 
-在此做一個小結，當 σ 大於 1 的設計，初始有效框架的選定為 P > 0.6
+在此做一個小結，當 σ 大於 1 的設計，初始有效框架的選定為 P > 0.6  
 就會直接導致articulation 失能的結果
 
 ![image](https://github.com/user-attachments/assets/ae57dcd0-dfb9-446a-833b-df8bc79bc9c9)  
 
 從Paper的圖片描述動態範圍與articulation 的關係  
-我們可以看出動態範圍在0.5以下的情況下articulation 才會生效
+我們可以看出動態範圍在0.5以下的情況下articulation 才會生效  
+為了觀察這張線圖的關係性，我使用dynamic range = 0.32代入articulaiton 算式  
+
 
 
 
