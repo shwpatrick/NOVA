@@ -212,15 +212,29 @@ $A_i$
 按照k-mean的設計，對於這樣的離群組在收斂後，最左側的收斂中心點會大幅度離群，而在後續合併中心點組合的設計中，由於相鄰距離超過了1，所以不會與其他中心點合併。
 我們可以在paper的中圖中觀察到這個現象。
 
-
 ![image](https://github.com/user-attachments/assets/8efb0a16-920d-4ed6-b336-b7ced2d239c8)
 
+以下是我調整極小值設置後所計算的k-mean結果，三張圖的極小值設置分別是1e-4, 1e-3.5, 1e-3
 
 <p align="left">
   <img src="data/1e-4 - auto2.20 - greedy/k-mean.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
   <img src="data/1e-3.5 - auto1.70 - greedy/k-mean.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
   <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/k-mean.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
+
+極小值因子在後續中帶來了極大的影響，考慮機率圖算法  
+$P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$  
+σ 為所有相鄰中心點間的最大距離，極小值的離群程度幾乎直接決定了σ 的對應大小，在此整理成表格
+
+| 極小值數值  | σ      |
+| ---------- | ------ |
+| 1e-4       | 2.20   |
+| 1e-3.5     | 1.70   |
+| 1e-3       | 1.51   |
+
+
+
+
 
 
 <script type="text/javascript"
