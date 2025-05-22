@@ -266,10 +266,10 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
  σ = 0.5, 正則化後  
 
 <p align="left">
-  <img src="1e-4.0 - hard1.10 - greedy/Probability_Map.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
-  <img src="1e-4.0 - hard1.10 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
-  <img src="1e-4.0 - hard0.50 - greedy/Probability_Map.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
-  <img src="1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-4.0 - hard1.10 - greedy/Probability_Map.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
+  <img src="data/1e-4.0 - hard1.10 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-4.0 - hard0.50 - greedy/Probability_Map.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
   
 
