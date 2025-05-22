@@ -243,6 +243,9 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
   <img src="data/1e-3.0 - auto1.51 - greedy - a_para 0.33/Merged_with_sigma.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
 </p>
 
+下圖是進行正規化後，對於每個中心點組成的框，(P>0.6)的條件下，達到標準的像素分布  
+而為空的框則會在下次被鄰近的有效框合併  
+
 <p align="left">
   <img src="data/1e-4 - auto2.20 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
   <img src="data/1e-3.5 - auto1.70 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
