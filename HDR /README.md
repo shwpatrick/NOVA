@@ -390,9 +390,36 @@ $$
 
 從Paper的圖片描述動態範圍與articulation 的關係  
 我們可以看出動態範圍在0.5以下的情況下articulation 才會生效  
-而這個在配置方法中難以達成
+而如果使用(P > 0.6)的框架，其動態範圍基本上很難達成要求
+
+重新觀察articulation公式：
+
+$$
+A_i = 1 - \exp\left(-\frac{(\Delta Y_i)^2}{2 \cdot 0.33^2} \right)
+$$
+
+我們可以看到除了動態範圍外，還存在參數0.33(後續稱為a_para)  
+我是否可以透過調整a_para的方法，讓articulation組合低於1，達到真正具備加權效果的影響？
+因此我做了一組對照組與實驗組，分別為a_para = 0.33 以及 a_para = 2.0
+2.0 這個數字是手動慢慢調整的，將articulation 降到可以看到不同加權的程度
+圖形方面則是一樣使用1e-3以及1e-4分別作圖  
+以下則是對應每個框架的articulation 實際參數
 
 
+1e-3 auto1.51 apara 0.33
+mask idx: 0 articulation: 1.0 , min: -3.0 , max: -0.1186158 , diff: 2.8813841  
+mask idx: 1 articulation: 1.0 , min: -1.9590952 , max: 1.090032 , diff: 3.049127  
+mask idx: 2 articulation: 1.0 , min: -0.45076218 , max: 2.3047442 , diff: 2.7555065  
+
+1e-3 auto1.51 apara 2.00
+mask idx: 0 articulation: 0.6457657 , min: -3.0 , max: -0.1186158 , diff: 2.8813841  
+mask idx: 1 articulation: 0.6871862 , min: -1.9590952 , max: 1.090032 , diff: 3.049127  
+mask idx: 2 articulation: 0.6129115 , min: -0.45076218 , max: 2.3047442 , diff: 2.7555065  
+
+<p align="left">
+  <img src="data/1e-4.0 - hard1.10 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="data/1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+</p>
 
 
 
