@@ -1,4 +1,5 @@
 
+
 # 概覽
 
 本篇是HDR轉LDR相關技術的內容研讀與實作整理  
@@ -9,10 +10,10 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 後續內容包含條目如下：  
 
 - [概念筆記](#概念筆記) - HDR轉LDR概念摘要
-- [框架拆解實作](#框架拆解實作) - 框架拆解實作流程(盡可能仿照論文內容)
+- [實作框架拆解](#實作框架拆解) - 框架拆解實作流程(盡可能仿照論文內容)
 - [觀察研究](#觀察研究) - 對於實作內容的探討
 
-
+---
 
 # 概念筆記
 
@@ -124,6 +125,89 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 
 此設計能更精確地模擬人眼在多光源環境中的亮度感知行為。
 
+---
+
 # 實作框架拆解
 
-## 框架拆解
+## 框架拆解流程(精簡)
+
+step 1. 讀取圖片，計算亮度，並取log  
+step 2. 以間距1為條件找出log明度範圍涵蓋間距(作為k-mean 初始中心點)  
+step 3. 使用k-mean 計算中心點直到收斂  
+step 4. 
+	- 去除沒有對應像素的中心點  
+	- 合併相鄰中心點距離1以內的中心點  
+	- 計算機率圖  
+	- 使用機率圖 P>0.6 確認像素對應的有效框架  
+	- 計算框架articulation  
+	- 使用articulation 對框架加權  
+	- 使用P>0.6 重算有效框架  
+	- 合併無效框架直到僅剩下有效框架  
+
+---
+
+ ## 框架拆解流程細述
+
+ 本流程根據論文《Lightness Perception in Tone Reproduction for High Dynamic Range Images》實作步驟重構  
+ 目的是將 HDR 影像分解為多個照明框架，模擬人眼明度感知過程  
+
+### Step 1. 圖像預處理
+
+- 讀入 HDR 圖像
+- 計算 luminance（亮度）：
+  $Y = 0.2126 R + 0.7152 G + 0.0722 B$
+- 轉為對數空間：
+  $\log_{10}(Y)$
+
+### Step 2. 初始化框架中心點
+
+- 根據 log 亮度範圍，**每 1 log 單位**初始化一個 K-means 中心點
+- 此初始化策略保證每個中心的亮度差異不小於 1
+
+### Step 3. K-means 分群至收斂
+
+- 在 log 亮度空間中執行 K-means clustering
+- 得到初步框架（framework）的中心點
+
+### Step 4. 框架精練（Refinement）
+
+- 4.1 移除空框架 - 移除未涵蓋任何像素的中心點（空群）
+- 4.2 合併鄰近中心點 - 若任兩中心點距離 < 1 log 單位，進行加權平均合併  
+
+### Step 5. 機率圖與有效框架檢查
+
+- 5.1 計算高斯機率圖 → 對每個框架中心 $\( C_i \)$ 計算：
+  $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$  
+  σ 為所有相鄰中心點間的最大距離
+- 5.2 定義有效框架區域 → 
+  當某 pixel 對框架 $i$ 的機率 $\( P_i > 0.6 \)$，視為屬於該框架
+- 若一個框架沒有任何 pixel 滿足此條件 → 移除
+
+### Step 6. 框架連結強度（Articulation）
+
+對每個有效框架
+$i$
+計算其動態範圍：
+$\Delta Y_i = \max(Y_i) - \min(Y_i)$  
+對應 articulation：
+$A_i = 1 - \exp\left( -\frac{\Delta Y_i^2}{2 \cdot \theta^2} \right), \quad \theta \approx 0.33$
+
+### Step 7. 機率加權與重正規化
+
+- 對每個框架機率圖乘上對應
+$A_i$  
+- 對每個像素沿框架軸 normalize，使總和為 1
+
+### Step 8. 框架最終篩選與合併
+
+- 使用加權後機率圖再次檢查有效區域（P > 0.6）
+- 合併仍無有效區域之框架
+- 若有中心點距離過近（< 1），再度合併並重計
+
+---
+
+
+
+<script type="text/javascript"
+  async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
