@@ -422,21 +422,29 @@ mask idx: 2 articulation: 0.6129115 , min: -0.45076218 , max: 2.3047442 , diff: 
 </p>
 
 1e-4 auto2.20 apara 0.33  
-mask idx: 0 articulation: 1.0 , min: -4.0 , max: -1.5650234 , diff: 2.4349766
-mask idx: 1 articulation: 1.0 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436
-mask idx: 2 articulation: 1.0 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115
-mask idx: 3 articulation: 1.0 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398
+mask idx: 0 articulation: 1.0 , min: -4.0 , max: -1.5650234 , diff: 2.4349766  
+mask idx: 1 articulation: 1.0 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436  
+mask idx: 2 articulation: 1.0 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115  
+mask idx: 3 articulation: 1.0 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398  
 
-1e-4 auto2.20 apara 2.00  
-mask idx: 0 articulation: 0.52342916 , min: -4.0 , max: -1.5650234 , diff: 2.4349766
-mask idx: 1 articulation: 0.91526663 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436
-mask idx: 2 articulation: 0.9157145 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115
-mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398
+1e-4 auto2.20 apara 2.00    
+mask idx: 0 articulation: 0.52342916 , min: -4.0 , max: -1.5650234 , diff: 2.4349766  
+mask idx: 1 articulation: 0.91526663 , min: -3.8081334 , max: 0.63550997 , diff: 4.4436436  
+mask idx: 2 articulation: 0.9157145 , min: -2.6387553 , max: 1.8096563 , diff: 4.4484115  
+mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.451398  
 
 <p align="left">
   <img src="data/1e-4.0 - auto2.20 - greedy - a_para 0.33/Probability_Map_After_Norm.png"  width="100%">
   <img src="data/1e-4.0 - auto2.20 - greedy - a_para 2.00/Probability_Map_After_Norm.png"  width="100%">
 </p>
+
+從這些數據來看我們可以觀察到，調整a_para確實可以讓articulation加權權重達到效果  
+但整體而言是讓極左跟極右的圖形因為受到裁切而權重降低  
+而這兩個框架在合併圖中極為重要，反而被降低了權重  
+可以在1e-3中，看出來通過mask的像素點變少
+而在1e-4中，並沒有辦法讓框架變得有效
+
+---
 
 
 
