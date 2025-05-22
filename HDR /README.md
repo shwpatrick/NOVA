@@ -1,17 +1,17 @@
 
-本篇內容包含
+# 概覽
 
-- [概覽](#概覽) - 本篇概述以及資料參考
+本篇是HDR轉LDR相關技術的內容研讀與實作整理  
+參考論文：[Lightness Perception in Tone Reproduction
+for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/krawczyk05eg.pdf)  
+圖像資料：[openexr網站](https://openexr.com/en/latest/test_images/ScanLines/Desk.html)  
+
+後續內容包含條目如下：  
+
 - [概念筆記](#概念筆記) - HDR轉LDR概念摘要
 - [框架拆解實作](#框架拆解實作) - 框架拆解實作流程(盡可能仿照論文內容)
 - [觀察研究](#觀察研究) - 對於實作內容的探討
 
-# 概覽
-
-本篇是參考自論文[Lightness Perception in Tone Reproduction
-for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/krawczyk05eg.pdf)的內容研讀與實作解析  
-來源自維基百科HDR相關技術的參考資料，作為初探HDR相關研究的敲門磚  
-使用圖像資料來源於[openexr網站](https://openexr.com/en/latest/test_images/ScanLines/Desk.html)  
 
 
 # 概念筆記
