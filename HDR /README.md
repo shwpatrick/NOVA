@@ -206,6 +206,18 @@ $A_i$
 
 ---
 
+# 觀察研究
+
+
+
+![1e-4.0 sigma:2.20](data/1e-4 - auto2.20 - greedy/k-mean.png)  
+
+
+
+<p align="center">
+  <img src="data/1e-4 - auto2.20 - greedy/k-mean.png" alt="1e-4 sigma:2.20 k-mean" width="40%">  
+  <img src="data/1e-3.5 - auto1.70 - greedy/k-mean.png" alt="1e-4 sigma:1.70 k-mean" width="40%">
+</p>
 
 
 <script type="text/javascript"
