@@ -253,7 +253,25 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
 </p>
 
 至此我開始思考 σ 設置對於有效框判定的影響，我改將 σ 設置為固定的常數而非最大相鄰中心點距離  
-以下分別將 σ 設置成1.1 以及0.5  
+以下分別將 σ 設置成1.1 以及0.5 ，使用極小值1e-4  
+
+1.1的數值選定，是為了符合原本相鄰中心距離必須 > 1否則合併中心的假設，這個是極度符合條件的最小值  
+0.5的數值選定，則是想藉此反向觀察，當 σ 小於 1 時違反了中心距離的條件，也就是相鄰中心距離必須 > 1 時的意義為何？
+1e-4的極小值選定則是因為，這個數值在原本的設置中會全部框架不符合 P > 0.6 的條件，我想以此觀察將極小值與 σ 的關聯性分離會產生的變化
+
+以下四張圖片分別代表 
+ σ = 1.1, 正則化前  
+ σ = 1.1, 正則化後  
+ σ = 0.5, 正則化前  
+ σ = 0.5, 正則化後  
+
+<p align="left">
+  <img src="1e-4.0 - hard1.10 - greedy/Probability_Map.png" alt="1e-4 sigma:2.20 k-mean" width="100%">  
+  <img src="1e-4.0 - hard1.10 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="1e-4.0 - hard0.50 - greedy/Probability_Map.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+  <img src="1e-4.0 - hard0.50 - greedy/Probability_Map_After_Norm.png" alt="1e-4 sigma:1.70 k-mean" width="100%">
+</p>
+  
 
 
 
