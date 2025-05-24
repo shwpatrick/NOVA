@@ -661,15 +661,15 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
 雙邊濾波器主要在於平滑紋理  
 但同時，如果機率圖σ過大->高斯過於平坦  
 很容易使得雙邊濾波後框架間的分界也隨之消失  
-因此我在自定義 
+所以我比較了直接設置固定值與計算值的效果  
+這邊依序採用了三種第二次機率的數值1.11(hard), 1.51(hard), 2.19(auto)  
+我會更傾向於使用固定數值分界，但這個可能會在使用其他圖片時，得不到同樣結論  
 
-<img src="https://github.com/user-attachments/assets/3973588e-4131-4bf1-a643-0c9522714889" style="width: 30%;">
-<img src="https://github.com/user-attachments/assets/f7ceb92e-6c72-49c2-b4d2-23c8c7e41e0f" style="width: 30%;">
-<img src="https://github.com/user-attachments/assets/f3ea9a4e-e242-4169-85f7-722cb03c04cc" style="width: 30%;">
+<img src="https://github.com/user-attachments/assets/dce5c8f2-01bc-4226-97fd-11252818d28b" style="width: 30%;">
+<img src="https://github.com/user-attachments/assets/d8375eb4-77ec-47bd-a486-b475749ac9ca" style="width: 30%;">
+<img src="https://github.com/user-attachments/assets/d4e1bf23-d2da-45c7-aa68-928c23842860" style="width: 30%;">
 
-![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/9621ea43-0079-4d35-9b14-df94a6193585)
-![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/cca4b8f3-79ed-4697-951b-cb738d95a604)
-![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/093d91d4-a9e4-4d71-9cd6-e4ffdebb6024)
+
 
 	
 ---
