@@ -688,9 +688,17 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
 
 # 總結
 
+
+Interestingly, the images tend to be decomposed only into two  
+frameworks, although there is no restriction on their number.  
+
+這句話取自Paper結論內容
+
 經過了這些實驗測試，我覺得這是一個很tricky的作法  
 透過高斯函數左右夾擊讓中間的框全部都變成無效框  
-又要讓單邊的高斯不會過度影響到極值的兩個框架，導致任何之一無法存活  
+又要讓單邊的高斯不會過度影響到極值的兩個框架，導致任何之一無法存活
+所以如果這個演算法設計成立，幾乎就會只剩兩個有效框  
+這個才是整個實作的意涵  
 
 σ 在這個方法裡扮演了十分重要的決策因子  
 但與極小值選取的關聯性讓我不太能接受  
