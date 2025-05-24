@@ -13,10 +13,10 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 - [實作框架拆解](#實作框架拆解) - 框架拆解實作流程(盡可能仿照論文內容)
 - [圖解流程演示](#圖解流程演示) - 對於每個步驟的圖形展示(展示用)  
 - [觀察研究](#觀察研究) - 對於實作內容的探討
-    - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)
-    - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響)
-    - [articulation的失能情況觀察](#articulation的失能情況觀察)
-    - [articulation縮放因子調整](#articulation縮放因子調整)
+    - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響) -> log極小值直接影響到了σ的決定值
+    - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響) -> 設計了兩種合併策略，結果找到了一模一樣的最終中心點- 	
+    - [articulation的常態性失能觀察](#articulation的常態性失能情況觀察) -> articulation通常都會失效的因果關係以及articulation生效的條件
+        - [articulation為甚麼會常態性失能](#articulation為甚麼會常態性失能)
 
 ---
 
@@ -439,18 +439,28 @@ $P_i(x, y) = \exp\left( -\frac{(C_i - Y(x, y))^2}{2\sigma^2} \right)$
 根據受到擠壓的程度不同而變成了距離1以下的遞增數組  
 
 在這個情況下，linear greedy以及closest first算法  
-兩者都是從第二個centroid開始逐步向右合併
-所以會得出一模一樣的最終中心點分布
+兩者都是從第二個centroid開始逐步向右合併  
+所以會得出一模一樣的最終中心點分布  
 
-這也可以左證上一個結論，極小值的設置值在σ為「最大相鄰中心距離時」
+因為最左中心點間距會極大於1，而其它剩餘中心點則會逐漸合併直到間距大於1  
+這也可以佐證上一個結論，極小值的設置值在σ為「最大相鄰中心距離」時   
 變相地直接決定了σ數值
 
 ---
 
-## articulation的失能情況觀察
+## articulation的常態性失能情況觀察
 
-在進行實作時，我注意到每個框架的articulation計算都接近於1  
-導致進行加權時，每個框架加權都相同，整個articulation的設計處於在失能的狀態  
+Paper中提及了articulation(連結強度)在通常情況下都是無效狀態
+在進行實作時，我也注意到每個框架的articulation計算基本上都是1  
+這導致進行加權時，每個框架加權都相同，整個articulation的設計處在常態性失能的狀態  
+雖然可以理解為這個是面對某些極端條件才會有效觸發的特殊參數，但我會想知道：
+
+> articulation 為甚麼會常態性失能？
+> 甚麼情況下會讓articulation發揮效果？
+> 如果強迫讓articulation發揮加權效果會怎麼樣？
+
+### articulation為甚麼會常態性失能
+
 articulation 由框架中的動態範圍所決定，而目前的算法推演會導致articulation失能  
 在此進行數學推導：
 
