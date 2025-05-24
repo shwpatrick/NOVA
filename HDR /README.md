@@ -232,7 +232,10 @@ $A_i$
 暗部區域也看不出紋理細節  
 這也就是論文設計的演算法的處理目標  
 
-![Original_Cliped](https://github.com/user-attachments/assets/5c7d5830-ea14-404a-9d59-72c65b589d92)
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/5c7d5830-ea14-404a-9d59-72c65b589d92"  width="30%">
+</p>
+
 
 ## K-means
 目的：為了將光照區塊(後續稱為框架)進行分群  
@@ -309,28 +312,34 @@ $A_i$
   <img src="https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08"  width="30%">
   <img src="https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78"  width="30%">
 </p>
-![Before bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08)
-![Before bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78)
 
 每個框架對應的機率圖(雙邊濾波後)  
 
-![After bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/13161c05-1de7-4b86-aee8-3fe13714124b)
-![After bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/ac9fd5e0-4a14-48a0-b7ea-d73c8db349ef)
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/13161c05-1de7-4b86-aee8-3fe13714124b"  width="30%">
+  <img src="https://github.com/user-attachments/assets/ac9fd5e0-4a14-48a0-b7ea-d73c8db349ef"  width="30%">
+</p>
 
 雙邊濾波後的機率圖(P > 0.6)  
 
 ![Bilateral_Filter](https://github.com/user-attachments/assets/fcda7263-0854-4092-a16f-7f8047ad285b)
 
 對於每個像素，選取機率更高的框架作為歸屬，進行渲染
-![Cluster_Map_after_Bilateral](https://github.com/user-attachments/assets/d6861205-2d9f-485c-81b9-56a886c2273e)
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/d6861205-2d9f-485c-81b9-56a886c2273e"  width="30%">
+</p>
 
 對於機率圖，乘上連結強度articulation  
 選取機率更高的框架作為歸屬，進行渲染(因為這裡articulation加權都是1，看不出差別)    
-![Cluster_Map_after_Articulation](https://github.com/user-attachments/assets/4c828e8a-73c1-4fa2-8131-eba94b50b721)
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/4c828e8a-73c1-4fa2-8131-eba94b50b721"  width="30%">
+</p>
 
 將機率進行正規化  
 在cluster_map看不出來差別  
-![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/965b02fa-0805-4a32-98f0-59f4dc8ef90e)
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/965b02fa-0805-4a32-98f0-59f4dc8ef90e"  width="30%">
+</p>
 
 
 
