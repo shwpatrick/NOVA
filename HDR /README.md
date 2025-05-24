@@ -219,9 +219,10 @@ $A_i$
 模仿人眼機制處理圖像，讓人眼看到更接近自然調亮的顯示圖片  
 
 ## 載入圖像
-目前顯示的是clipped後的圖片
+目前顯示的是clipped後的圖片  
 直接線性處理可以看出來明顯過曝、暗部區域也看不出紋理細節  
 這也就是論文設計的演算法的處理目標  
+
 ![Original_Cliped](https://github.com/user-attachments/assets/5c7d5830-ea14-404a-9d59-72c65b589d92)
 
 ## K-means
@@ -230,23 +231,27 @@ $A_i$
 ![k-mean](https://github.com/user-attachments/assets/f621bd24-da60-4cb4-967a-51a6f2dd9905)
 
 ## 刪除空的框架  
-實作：將圖片中框的框架進行刪除  
+實作：將圖片中空的框架進行刪除  
 補充：從圖片看起來沒有需要(可能是為了某些特殊條件圖片的需求)  
+
 ![delete_empty](https://github.com/user-attachments/assets/5546d7f0-45bd-4873-8de5-8d7898708ed4)
 
 ## 合併框架
 目的：將區別過近的圖區視為同一個光照條件的區域，進行合併  
 實作：合併中心點相離距離<1的中心點群組  
+
 ![Greedy_Linear](https://github.com/user-attachments/assets/f25bbe7c-e4ce-40a9-beb6-10e03630b395)
 
 ## 計算高斯σ
 目的：對於每個像素是否屬於框架，使用的是軟性的分配而不是硬性的分群，所以需要計算機率  
 實作：計算σ並且配置高斯分布  
+
 ![Merged_with_sigma](https://github.com/user-attachments/assets/637df8b0-ee73-4913-b6c7-030740ea0863)
 
 ## 計算機率圖
 目的：使用機率條件設置每個像素是否屬於這個框架，可信度過低的像素會被濾除  
-實作：顯示對於每個框架P>0.6的區塊
+實作：顯示對於每個框架P>0.6的區塊  
+
 ![Probability_Map](https://github.com/user-attachments/assets/65c603f7-a370-4634-9fe9-c5e2c8ece557)
 
 ## 正規化
@@ -255,31 +260,50 @@ $A_i$
 如果像素在其它框架的機率比較低，那該像素就更有可能屬於該框架  
 如果像素在其它框架的機率比較高，那該像素就更不可能屬於該框架  
 實作：將每個框架進行正規化，使每個像素對於框架的總機率等於1，顯示對於每個框架P>0.6的區塊  
+
 ![Probability_Map_After_Norm](https://github.com/user-attachments/assets/d86e7b29-ab1a-4c67-8cd0-0588a2acdbf1)
 
 ## 合併空框架
-目的：前一個步驟會讓有些框架無效，將這些框架與接近的框架進行合併  
+目的：  
+前一個步驟會讓有些框架無效，將這些框架與接近的框架進行合併  
+觀察Cluster Map可以知道，其實就是將淺灰色的區塊分配給亮區或暗區(結果選暗區)  
 實作：合併P>0.6沒有像素點的框架，重新計算機率圖  
 補充：
 這裡機率圖σ使用的是1.1，不再是相鄰中心距離點  
 因為合併後的的中心點較少，相鄰中心距離變得很大  
 如果高斯又過於平坦，可能會導致雙邊濾波的時候讓邊界又過度模糊化  
 這部份Paper似乎沒有特別描述，是我自己的猜測與調整  
+
 ![Final_refine_centroids](https://github.com/user-attachments/assets/49f18105-7cac-4dc9-bdda-bf64c3eb6fb2)
 
 
 ## 雙邊濾波
-目的：前面的圖片
+目的：
+前面的圖片使用的分區只考慮亮度，而沒有考慮紋理  
+簡單來說，對於一個物體，可能會有高光跟暗部  
+只按照亮度分區就會導致高光被分配到亮的區塊  
+讓一個物體的物件不再是屬於同一個框架  
+從圖片上來看就是那本書的反光太亮了，但它希望書都屬於一個框架  
+所以把圖片模糊平衡，這樣重新分區就會讓書都屬於暗部框架  
+實作：
+對於每個框架的機率圖做雙邊濾波  
+補充：
+雙邊濾波帶有將紋理模糊的成分，所以如果原本的框架分界不夠清楚  
+可能會因為這個模糊動作，讓框架分界失效  
+這個會在後續觀察中被討論  
 
 每個框架對應的機率圖(雙邊濾波前)  
+
 ![Before bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08)
 ![Before bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78)
 
 每個框架對應的機率圖(雙邊濾波後)  
+
 ![After bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/13161c05-1de7-4b86-aee8-3fe13714124b)
 ![After bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/ac9fd5e0-4a14-48a0-b7ea-d73c8db349ef)
 
 雙邊濾波後的機率圖(P > 0.6)  
+
 ![Bilateral_Filter](https://github.com/user-attachments/assets/fcda7263-0854-4092-a16f-7f8047ad285b)
 
 對於每個像素，選取機率更高的框架作為歸屬，進行渲染
