@@ -14,8 +14,8 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 - [圖解流程演示](#圖解流程演示) - 對於每個步驟的圖形展示(展示用)  
 - [觀察研究](#觀察研究) - 對於實作內容的探討
     - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響) -> log極小值直接影響到了σ的決定值
-    - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響) -> 設計了兩種合併策略，結果找到了一模一樣的最終中心點- 	
-    - [articulation的常態性失能觀察](#articulation的常態性失能情況觀察) -> articulation通常都會失效的因果關係以及articulation生效的條件
+    - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響) -> 設計了兩種合併策略，結果找到了一模一樣的最終中心點   	
+    - [articulation的常態性失能觀察](#articulation的常態性失能情況觀察) -> articulation通常都會失效的因果關係，以及articulation生效的條件
         - [articulation為甚麼會常態性失能](#articulation為甚麼會常態性失能) -> 動態範圍是兩倍的σ，而σ因為條件而一定會大於1(動態範圍大於2)
         - [甚麼情況下會讓articulation發揮效果](#甚麼情況下會讓articulation發揮效果) -> y_max 跟 y_min 碰到了亮度邊界，因此發生不是再是P=0.6時的數值
 
