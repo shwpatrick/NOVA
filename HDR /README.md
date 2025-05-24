@@ -11,7 +11,7 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
 
 - [概念筆記](#概念筆記) - HDR轉LDR概念摘要
 - [實作框架拆解](#實作框架拆解) - 框架拆解實作流程(盡可能仿照論文內容)
-- [圖解流程演示](#圖解流程演示) - 對於每個步驟的圖形展示(探討部份在後續內容)  
+- [圖解流程演示](#圖解流程演示) - 對於每個步驟的圖形展示(展示用)  
 - [觀察研究](#觀察研究) - 對於實作內容的探討
     - [log極小值與σ對於有效框的影響](#log極小值與σ對於有效框的影響)
     - [k-means後合併策略對於σ選定的影響](#k-means後合併策略對於σ選定的影響)
@@ -210,6 +210,65 @@ $A_i$
 - 若有中心點距離過近（< 1），再度合併並重計
 
 ---
+
+# 圖解流程展示
+
+載入圖像
+目前顯示的是clipped後的圖片
+直接線性處理可以看出來明顯過曝
+![Original_Cliped](https://github.com/user-attachments/assets/5c7d5830-ea14-404a-9d59-72c65b589d92)
+
+按照取log後的間距分布初始中心點數量並使用K-means自動收斂  
+![k-mean](https://github.com/user-attachments/assets/f621bd24-da60-4cb4-967a-51a6f2dd9905)
+
+刪除空的中心點  
+從圖片看起來沒有需要(可能是為了特定條件的需求)  
+![delete_empty](https://github.com/user-attachments/assets/5546d7f0-45bd-4873-8de5-8d7898708ed4)
+
+合併中心點相離距離<1的中心點群組  
+![Greedy_Linear](https://github.com/user-attachments/assets/f25bbe7c-e4ce-40a9-beb6-10e03630b395)
+
+計算σ並且配置高斯分布  
+![Merged_with_sigma](https://github.com/user-attachments/assets/637df8b0-ee73-4913-b6c7-030740ea0863)
+
+顯示對於每個框架P>0.6的區塊
+![Probability_Map](https://github.com/user-attachments/assets/65c603f7-a370-4634-9fe9-c5e2c8ece557)
+
+將每個框架進行正規化，使每個像素對於框架的總機率等於1
+顯示對於每個框架P>0.6的區塊
+![Probability_Map_After_Norm](https://github.com/user-attachments/assets/d86e7b29-ab1a-4c67-8cd0-0588a2acdbf1)
+
+合併P>0.6沒有像素點的框架，重新計算機率圖  
+這裡機率圖sigma使用的是1.1，不再是相鄰中心距離點  
+因為如果高斯又過於平坦，可能會導致雙邊濾波的時候讓邊界又過度模糊化
+![Final_refine_centroids](https://github.com/user-attachments/assets/49f18105-7cac-4dc9-bdda-bf64c3eb6fb2)
+
+每個框架對應的機率圖(雙邊濾波前)  
+![Before bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08)
+![Before bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78)
+
+每個框架對應的機率圖(雙邊濾波後)  
+![After bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/13161c05-1de7-4b86-aee8-3fe13714124b)
+![After bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/ac9fd5e0-4a14-48a0-b7ea-d73c8db349ef)
+
+雙邊濾波後的機率圖(P > 0.6)  
+![Bilateral_Filter](https://github.com/user-attachments/assets/fcda7263-0854-4092-a16f-7f8047ad285b)
+
+對於每個像素，選取機率更高的框架作為歸屬，進行渲染
+![Cluster_Map_after_Bilateral](https://github.com/user-attachments/assets/d6861205-2d9f-485c-81b9-56a886c2273e)
+
+對於機率圖，乘上連結強度articulation  
+選取機率更高的框架作為歸屬，進行渲染(因為這裡articulation加權都是1，看不出差別)    
+![Cluster_Map_after_Articulation](https://github.com/user-attachments/assets/4c828e8a-73c1-4fa2-8131-eba94b50b721)
+
+將機率進行正規化  
+在cluster_map看不出來差別  
+![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/965b02fa-0805-4a32-98f0-59f4dc8ef90e)
+
+
+
+---
+
 
 # 觀察研究
 
