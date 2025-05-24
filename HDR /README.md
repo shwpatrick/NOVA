@@ -19,7 +19,13 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
         - [articulation為什麼會常態性失能](#articulation為甚麼會常態性失能) -> 動態範圍是兩倍的σ，而σ因為條件而一定會大於1(動態範圍大於2)
         - [articulation什麼情況下會發揮效果](#articulation什麼情況下會發揮效果) -> y_max 跟 y_min 碰到了亮度邊界，因此發生不是再是P=0.6時的數值
         - [articulation如果強迫發揮加權效果會如何](#articulation如果強迫發揮加權效果會如何) -> 合併框架中沒有被選擇合併的框架(在本圖中是過曝框架)更有可能因為加權而消失  
-
+    - [其他實驗記錄](#其他實驗記錄)
+        - [k-means k值設置]
+        - [採用圖像的細微差異]
+        - [所有中心點獨立σ設計]
+        - [雙邊濾波器與第二次σ選用]
+- [程式參數使用介紹](#程式參數使用介紹)
+- [既有資料夾介紹](#既有資料夾介紹)
 ---
 
 # 概念筆記
@@ -602,10 +608,100 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
 經歷過合併的框架會在log亮度中更接近中心點，也就更不易被裁切  
 也就是說，在合併框架中沒有被選擇合併的框架(在本圖中是過曝框架) 更有可能因為加權而消失  
 
-
 ---
 
+# 其他實驗記錄
+   
+## k-means k值設置
 
+實驗後注意到了paper的k-mean 其實是對log上下都取整再去計算k的數值
+較高密度的centroids也影響到了自動計算σ的數值
+
+## 採用圖像的細微差異
+
+觀察paper跟我的分布圖可以發現  
+我的圖片跟Paper圖片在最高亮度區域有所不同  
+我的實際上少了一截，(可能由於載入方法或者是圖源不同)  
+因此實作上即使都使用Paper提供的參數
+效果可能也有一定的落差
+
+![image](https://github.com/user-attachments/assets/ac72d4a9-ebd0-4779-a0c0-655b09387536)
+![image](https://github.com/user-attachments/assets/bc5ba21f-8f5f-4767-a56f-e24581b8f899)
+
+## 所有中心點獨立σ設計
+
+認知到σ對於區分影響極大後，我開始思考對於每個centroid該做不同的σ  
+讓加權的效果有所不同，實現在程式裡的auto_multi方法
+使用的是單個cetroid對於相鄰左右的centroid取較大值作為 σ
+某種程度上來說更容易保留極左極右框架  
+但沒有更繼續的深入研究與比較
+
+![Merged_with_sigma](https://github.com/user-attachments/assets/88ec62a6-8f38-4b24-a658-407f8022491c)
+
+## 雙邊濾波器與第二次σ選用
+
+雙邊濾波器主要在於平滑紋理
+但同時，如果機率圖σ過大->高斯過於平坦，很容易使得雙邊濾波後框架間的分界也隨之消失
+因此我在自定義
+
+![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/3973588e-4131-4bf1-a643-0c9522714889)
+![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/9621ea43-0079-4d35-9b14-df94a6193585)
+
+![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/f7ceb92e-6c72-49c2-b4d2-23c8c7e41e0f)
+![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/cca4b8f3-79ed-4697-951b-cb738d95a604)
+
+![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/f3ea9a4e-e242-4169-85f7-722cb03c04cc)
+![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/093d91d4-a9e4-4d71-9cd6-e4ffdebb6024)
+
+	
+---
+
+# 程式參數使用介紹
+
+    # ============================================================
+    black_squeeze = -3            # 極小值設置
+    sigma_mode = 'auto'           # hard, auto, auto_multi
+          # hard : 使用固定數值
+          # auto : 自動計算相鄰中心點最大距離
+          # auto_multi : 對於每個centroid 配置獨立sigma，數值為左右相鄰centroid中的較大值
+    hard_sigma = False            # 是否對於第一次機率圖使用hard sigma
+                                  # 如果使用auto 或者auto_multi請設為false
+    hard_sigma_value = 0.5        # hard sigma數值
+    # ============================================================
+    strategy = 'greedy'           # 合併策略
+        # closest : closest first(論文作法)
+        # greedy : greedy linear
+    # ============================================================
+    second_hard_sigma = False     # 第二次機率圖sigma計算
+    second_hard_sigma_value = 1.1
+        # 如果使用false 則會沿用第一個sigma的策略
+        # 第一次選hard會套用hard sigma 的數值
+    # ============================================================
+    a_para = 0.33 # articulation參數，論文設置0.33
+    arti_mode = 1
+        # 0 : 不計算articulation
+        # 1 : 計算articulation 使用P>0.6(論文作法)
+        # 2 : 計算articulation 使用centroid硬分界決定y_max, y_min
+    bila_mode = 1
+        # 0 : 不套用bilateral filter
+        # 1 : 套用bilateral filter
+    kmean_mode = 1
+        # 0 : 取log後直接計算間距，k會比論文作法小
+        # 1 : 取log後，對於上下界向上下取整，k會比較大(論文作法)
+    # ============================================================
+    base_folder = "data_changekmeank"
+        # 程式會依照 極小值 - 第一次sigma策略與數值 - 合併方法 - a_para
+        # 建立對應資料夾於base_folder之下
+        # 由於auto 方法的sigma 不會在初始計算，因此一開始會設置為 autoUNKNOWN
+        # 後續在確定sigma數值後更改資料夾名稱
+        # 如果有跟更改後的資料夾名稱同名的資料夾，會直接把舊資料夾刪除
+        # 如果要進行其它的測試，請手動更改資料夾名稱區分資料
+    
+# 既有資料夾介紹
+
+- data_changekmeank : 改用了論文的k-means的k取法
+- data_v4 : 測試prob計算的articulation a_para 與 bilateral 的關係
+- data_v5 ：套用全新的articulation 設計 也就是以cetnroids 為核的實驗(但其實articulation都不太生效)
 
 
 
