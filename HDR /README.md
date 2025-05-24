@@ -18,6 +18,7 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
     - [articulation的常態性失能觀察](#articulation的常態性失能情況觀察) -> articulation通常都會失效的因果關係，以及articulation生效的條件
         - [articulation為什麼會常態性失能](#articulation為甚麼會常態性失能) -> 動態範圍是兩倍的σ，而σ因為條件而一定會大於1(動態範圍大於2)
         - [articulation什麼情況下會發揮效果](#articulation什麼情況下會發揮效果) -> y_max 跟 y_min 碰到了亮度邊界，因此發生不是再是P=0.6時的數值
+        - [articulation如果強迫發揮加權效果會如何](#articulation如果強迫發揮加權效果會如何) -> 高亮區域的有效框架會消失
 
 ---
 
@@ -456,9 +457,9 @@ Paper中提及了articulation(連結強度)在通常情況下都是無效狀態
 這導致進行加權時，每個框架加權都相同，整個articulation的設計處在常態性失能的狀態  
 雖然可以理解為這個是面對某些極端條件才會有效觸發的特殊參數，但我會想知道：
 
-> articulation 為甚麼會常態性失能？
-> 甚麼情況下會讓articulation發揮效果？
-> 如果強迫讓articulation發揮加權效果會怎麼樣？
+> articulation為甚麼會常態性失能？
+> articulation什麼情況下會發揮效果？
+> articulation如果強迫發揮加權效果會如何？
 
 ### articulation為甚麼會常態性失能
 
@@ -523,14 +524,22 @@ $$
 在此做一個小結，當 σ 大於 1 的設計，初始有效框架的選定為 P > 0.6  
 就會直接導致articulation 失能的結果  
 
-### 甚麼情況下會讓articulation發揮效果
+### articulation什麼情況下會發揮效果
 
+從上面的推論繼續向下延伸，在正常的高斯分布下：
 
-
-
-## articulation縮放因子調整
+- $Y_{\max} \approx C_i + 1.0108 \cdot \sigma$
+- $Y_{\min} \approx C_i - 1.0108 \cdot \sigma$
+- $dynamic range \approx 2.0216 \cdot \sigma$
 
 ![image](https://github.com/user-attachments/assets/ae57dcd0-dfb9-446a-833b-df8bc79bc9c9)  
+
+按照這張圖片的動態範圍與articulation的對應關係  
+除非 σ 數值極小(但這個可能性已經在這個演算法設計中被排除)  
+或者 $Y_{\max}$ 或 $Y_{\min} 受到亮度邊界裁切而不再是高斯P=0.6的數值  
+articulation 才會因為動態範圍變小而發生作用  
+
+## articulation如果強迫發揮加權效果會如何
 
 從Paper的圖片描述動態範圍與articulation 的關係  
 我們可以看出動態範圍在0.5以下的情況下articulation 才會生效  
@@ -543,9 +552,10 @@ A_i = 1 - \exp\left(-\frac{(\Delta Y_i)^2}{2 \cdot 0.33^2} \right)
 $$
 
 我們可以看到除了動態範圍外，還存在參數0.33(後續稱為a_para)  
-我是否可以透過調整a_para的方法，讓articulation組合低於1，達到真正具備加權效果的影響？  
+我是否可以透過調整a_para的方法，讓articulation低於1，達到真正具備加權效果的影響？  
 因此我做了一組對照組與實驗組，分別為a_para = 0.33 以及 a_para = 2.0  
-2.0 這個數字是手動慢慢調整的，將articulation 降到可以看到不同加權的程度  
+2.0 這個數字是手動慢慢調整的，將articulation降到可以看到不同加權的程度  
+
 圖形方面則是一樣使用1e-3以及1e-4分別作圖  
 以下則是對應每個框架的articulation 實際參數  
 
