@@ -304,6 +304,11 @@ $A_i$
 
 每個框架對應的機率圖(雙邊濾波前)  
 
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08"  width="30%">
+  <img src="https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78"  width="30%">
+</p>
 ![Before bilateral #0 (P _ 0 0)](https://github.com/user-attachments/assets/b00cd034-4907-4dcd-90a2-3c4d32d60e08)
 ![Before bilateral #1 (P _ 0 0)](https://github.com/user-attachments/assets/b93ea86e-5f98-4d75-8c11-3b003b943c78)
 
@@ -614,43 +619,45 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
    
 ## k-means k值設置
 
-實驗後注意到了paper的k-mean 其實是對log上下都取整再去計算k的數值
-較高密度的centroids也影響到了自動計算σ的數值
+實驗後注意到了paper的k-mean 其實是對log上下都取整再去計算k的數值  
+較高密度的centroids也影響到了自動計算σ的數值  
+所以Paper在同樣的極小值計算下，σ會有比較小的數值
+但中心點密度較高也會導致
 
 ## 採用圖像的細微差異
 
 觀察paper跟我的分布圖可以發現  
 我的圖片跟Paper圖片在最高亮度區域有所不同  
 我的實際上少了一截，(可能由於載入方法或者是圖源不同)  
-因此實作上即使都使用Paper提供的參數
-效果可能也有一定的落差
+因此實作上即使都使用Paper提供的參數  
+效果可能也有一定的落差  
 
-![image](https://github.com/user-attachments/assets/ac72d4a9-ebd0-4779-a0c0-655b09387536)
-![image](https://github.com/user-attachments/assets/bc5ba21f-8f5f-4767-a56f-e24581b8f899)
+<img src="https://github.com/user-attachments/assets/ac72d4a9-ebd0-4779-a0c0-655b09387536" style="width: 50%;">
+<img src="https://github.com/user-attachments/assets//bc5ba21f-8f5f-4767-a56f-e24581b8f899" style="width: 50%;">
 
 ## 所有中心點獨立σ設計
 
 認知到σ對於區分影響極大後，我開始思考對於每個centroid該做不同的σ  
-讓加權的效果有所不同，實現在程式裡的auto_multi方法
-使用的是單個cetroid對於相鄰左右的centroid取較大值作為 σ
+讓加權的效果有所不同，實現在程式裡的auto_multi方法  
+使用的是單個cetroid對於相鄰左右的centroid取較大值作為 σ  
 某種程度上來說更容易保留極左極右框架  
-但沒有更繼續的深入研究與比較
+但沒有更繼續的深入研究與比較  
 
 ![Merged_with_sigma](https://github.com/user-attachments/assets/88ec62a6-8f38-4b24-a658-407f8022491c)
 
 ## 雙邊濾波器與第二次σ選用
 
-雙邊濾波器主要在於平滑紋理
-但同時，如果機率圖σ過大->高斯過於平坦，很容易使得雙邊濾波後框架間的分界也隨之消失
-因此我在自定義
+雙邊濾波器主要在於平滑紋理  
+但同時，如果機率圖σ過大->高斯過於平坦  
+很容易使得雙邊濾波後框架間的分界也隨之消失  
+因此我在自定義 
 
-![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/3973588e-4131-4bf1-a643-0c9522714889)
+<img src="https://github.com/user-attachments/assets/3973588e-4131-4bf1-a643-0c9522714889" style="width: 30%;">
+<img src="https://github.com/user-attachments/assets/f7ceb92e-6c72-49c2-b4d2-23c8c7e41e0f" style="width: 30%;">
+<img src="https://github.com/user-attachments/assets/f3ea9a4e-e242-4169-85f7-722cb03c04cc" style="width: 30%;">
+
 ![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/9621ea43-0079-4d35-9b14-df94a6193585)
-
-![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/f7ceb92e-6c72-49c2-b4d2-23c8c7e41e0f)
 ![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/cca4b8f3-79ed-4697-951b-cb738d95a604)
-
-![Cluster_Map_after_Norm](https://github.com/user-attachments/assets/f3ea9a4e-e242-4169-85f7-722cb03c04cc)
 ![New_Probability_Map_After_Norm](https://github.com/user-attachments/assets/093d91d4-a9e4-4d71-9cd6-e4ffdebb6024)
 
 	
