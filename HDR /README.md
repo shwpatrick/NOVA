@@ -631,10 +631,24 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
    
 ## k-means k值設置
 
-實驗後注意到了paper的k-mean 其實是對log上下都取整再去計算k的數值  
+實驗後注意到了paper的k-mean初始中心群  
+其實是對log上下都取整再去計算k的數值  
+所以與我的中心群數量有所不同  
 較高密度的centroids也影響到了自動計算σ的數值  
-所以Paper在同樣的極小值計算下，σ會有比較小的數值
-但中心點密度較高也會導致
+所以Paper在同樣的極小值計算下，σ會有比較小的數值  
+以下依序分別是在1e-3 選取 k = 8(Paper數量), 6的結果    
+
+更高密度的K值設計固然會讓合併框架更平滑合理  
+但也會更容易讓兩個極值有效框受到過近的擠壓而在正則化後失效  
+是個值得注意與考慮的點  
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/fb227ff4-3985-4688-afa6-e8cc73358054"  width="100%">
+  <img src="https://github.com/user-attachments/assets/ee14d20d-6c3b-40d4-b357-1d8ac45a2e63"  width="100%">
+</p>
+
+![Probability_Map_After_Norm](https://github.com/user-attachments/assets/6a2fd4d0-cf1e-4cd5-9ffe-85935ef1bd13)
+![Probability_Map_After_Norm](https://github.com/user-attachments/assets/9e6525da-0390-429f-b943-2d2f78da2ab9)
 
 ## 採用圖像的細微差異
 
@@ -674,9 +688,9 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
 
 # 總結
 
-經過了這些實驗測試，我覺得這是一個很tricky的作法
-透過高斯函數左右夾擊讓中間的框全部都變成無效框
-又要讓單邊的高斯不會過度影響到極值的兩個框架，導致任何之一無法存活
+經過了這些實驗測試，我覺得這是一個很tricky的作法  
+透過高斯函數左右夾擊讓中間的框全部都變成無效框  
+又要讓單邊的高斯不會過度影響到極值的兩個框架，導致任何之一無法存活  
 
 σ 在這個方法裡扮演了十分重要的決策因子  
 但與極小值選取的關聯性讓我不太能接受  
