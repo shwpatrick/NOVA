@@ -18,7 +18,7 @@ for High Dynamic Range Images](https://resources.mpi-inf.mpg.de/hdr/lightness/kr
     - [articulation的常態性失能觀察](#articulation的常態性失能情況觀察) -> articulation通常都會失效的因果關係，以及articulation生效的條件
         - [articulation為什麼會常態性失能](#articulation為甚麼會常態性失能) -> 動態範圍是兩倍的σ，而σ因為條件而一定會大於1(動態範圍大於2)
         - [articulation什麼情況下會發揮效果](#articulation什麼情況下會發揮效果) -> y_max 跟 y_min 碰到了亮度邊界，因此發生不是再是P=0.6時的數值
-        - [articulation如果強迫發揮加權效果會如何](#articulation如果強迫發揮加權效果會如何) -> 高亮區域的有效框架會消失
+        - [articulation如果強迫發揮加權效果會如何](#articulation如果強迫發揮加權效果會如何) -> 合併框架中沒有被選擇合併的框架(在本圖中是過曝框架)更有可能因為加權而消失  
 
 ---
 
@@ -561,7 +561,6 @@ $$
 圖形方面則是一樣使用1e-3以及1e-4分別作圖  
 以下則是對應每個框架的articulation 實際參數  
 
-
 1e-3 auto1.51 apara 0.33  
 mask idx: 0 articulation: 1.0 , min: -3.0 , max: -0.1186158 , diff: 2.8813841  
 mask idx: 1 articulation: 1.0 , min: -1.9590952 , max: 1.090032 , diff: 3.049127  
@@ -594,11 +593,15 @@ mask idx: 3 articulation: 0.774406 , min: -1.1466537 , max: 2.3047442 , diff: 3.
   <img src="data/1e-4.0 - auto2.20 - greedy - a_para 2.00/Probability_Map_After_Norm.png"  width="100%">
 </p>
 
+首先解釋，這裡的articulation計算是在第一次計算高斯機率圖後  
+但實際上的articulation 應該計算在第二次計算高斯機率圖，且經過雙邊濾波器之後  
+但在這裡由於有多個框架更可以看得出來articulation對於圖片的影響方法  
+
 從這些數據來看我們可以觀察到，調整a_para確實可以讓articulation加權權重生效  
-但整體而言是讓極左跟極右的圖形因為受到裁切而權重降低  
-而這兩個框架在合併圖中極為重要，反而被降低了權重  
-可以在1e-3中，看出來通過mask的像素點變少  
-而在1e-4中，並沒有辦法讓既存框架變得有效
+整體而言是讓極左跟極右的圖形因為受到裁切而權重降低  
+經歷過合併的框架會在log亮度中更接近中心點，也就更不易被裁切  
+也就是說，在合併框架中沒有被選擇合併的框架(在本圖中是過曝框架) 更有可能因為加權而消失  
+
 
 ---
 
