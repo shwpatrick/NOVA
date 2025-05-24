@@ -324,18 +324,20 @@ $A_i$
 
 ![Bilateral_Filter](https://github.com/user-attachments/assets/fcda7263-0854-4092-a16f-7f8047ad285b)
 
+## 選染機率圖
 對於每個像素，選取機率更高的框架作為歸屬，進行渲染
 <p align="left">
   <img src="https://github.com/user-attachments/assets/d6861205-2d9f-485c-81b9-56a886c2273e"  width="30%">
 </p>
 
+## 渲染機率圖(乘上Articulation加權)
 對於機率圖，乘上連結強度articulation  
 選取機率更高的框架作為歸屬，進行渲染(因為這裡articulation加權都是1，看不出差別)    
 <p align="left">
   <img src="https://github.com/user-attachments/assets/4c828e8a-73c1-4fa2-8131-eba94b50b721"  width="30%">
 </p>
 
-將機率進行正規化  
+## 渲染機率圖(正規化後)
 在cluster_map看不出來差別  
 <p align="left">
   <img src="https://github.com/user-attachments/assets/965b02fa-0805-4a32-98f0-59f4dc8ef90e"  width="30%">
